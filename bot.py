@@ -300,6 +300,7 @@ async def transfer_flow_hours_process(update: Update, context: ContextTypes.DEFA
             """, (user_id, recipient_id, amount))
             conn.commit()
             context.user_data.pop("transfer_step", None)
+            context.user_data.pop("recipient_id", None)
             await update.message.reply_text(f"✅ Вы успешно перевели {amount} Flow-часов пользователю с ID {recipient_id}!", reply_markup=main_menu_keyboard())
         except ValueError:
             await update.message.reply_text("❌ Сумма должна быть положительным числом.")
